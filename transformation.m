@@ -25,12 +25,7 @@ scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
         x(x<0) = 0;
         [x, lambda] = boxcox(x + eps);
     end
-%% Load and save data
-    function data = load_data(id)
-        filename = sprintf('data/%s.csv', id);
-        T = readtable(filename);
-        data = T{:,'value'};
-    end
+
 %% Define function in printing html
 get_style = @()'<style type="text/css">img{height:200; margin:3px;}</style>';
     function print_number(name, value, filter)
@@ -74,10 +69,12 @@ fprintf(fid, '<table border="1">');
 ids = natdir('data/*.csv');
 for i = 1:length(ids)
     id = ids{i};
-    data = load_data(id);
-    %% Print
-    fprintf(fid, '<tr>');
+    filename = sprintf('data/%s.csv', id);
+    T = readtable(filename);
+    data = T{:,'value'};
     
+    %% Print
+    fprintf(fid, '<tr>');    
     fprintf(fid, '<th>ID</br>%s</th>', id);
     print_number('Coef. Var', std(data)/mean(data), 1);
     print_number('Skew', skewness(data), 1);
