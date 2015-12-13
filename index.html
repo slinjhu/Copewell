@@ -9,6 +9,19 @@
         text-decoration: none;
     }
     </style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+      },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+    </script>
 </head>
 
 <body>
@@ -27,15 +40,30 @@
 
     <h2>Subdomain</h2>
     <ul>
-        <li><a href="public/covvar.html" target=_blank>Covariance and correlation</a></li>
+        <li><a href="public/covvar.html" target=_blank>Covariance and correlation</a></br>
+            <ul>
+                <li><b>Covariance</b>: $cov(X, Y) = E[(X - E[X]) \cdot (Y - E[Y]) ]$</li>
+                <li><b>Cronbach's alpha</b>: a measure of internal consistency</li>
+            </ul>
+        </li>
     </ul>
 
 
-    <h2>Statistics</h2>
+    <h2>Download statistics</h2>
     <ul>
         <li><a href="public/data.csv">Statistics of original data</a></li>
         <li><a href="public/data_scaled.csv">Statistics of scaled data</a></li>
     </ul>
+    <p>Definitions:
+    <ul>
+        <li><b>Mean</b>: $ \mu = E[X] $
+        </li>
+        <li><b>STD</b> (Standard deviation): $\sigma = \sqrt{E[(X-\mu)^2]}$
+        </li>
+        <li><b>Skewness</b> (third standardized moment): $\gamma_1 = E\left[ \left( {X-\mu\over\sigma} \right)^3 \right] $
+        </li>
+    </ul>
+    </p>
 
 </body>
 </html>
