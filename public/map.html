@@ -11,9 +11,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
     <script src="js/mapdraw.js"></script>
     <style type="text/css">
-    h2{
-        font-size: 18pt;
-    }
     .map{
         border: 1px solid green;
         max-width: 1000px;
@@ -96,7 +93,7 @@
     <p>
         Type: 
         <select id="folder" onchange="update();">
-            <option value="data">Original</option>
+            <option value="data">Raw</option>
             <option value="data_scaled">Scaled</option>
         </select>
     </p>
@@ -111,7 +108,7 @@
 
         var folderText = $("#folder option:selected").html();
         var measureText = $("#measure option:selected").html();
-        var title = folderText + " Measure " + measureText;
+        var title = folderText + " " + measureText;
 
         mapdraw("#map", filename, title);
     }

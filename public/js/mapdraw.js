@@ -10,8 +10,9 @@ function mapdraw(container, datafile, title, min, max){
         map.loadMap(json, countydata);
         map.addLegend(countydata);
         d3.select(container)
-        .insert('h2', ":first-child")
-        .style('text-align', 'center')
+        .insert('p', ":first-child")
+            .style('text-align', 'center')
+            .style('font-size', '18pt')
         .html(title);
     });
 }
