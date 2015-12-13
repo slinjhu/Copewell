@@ -1,33 +1,7 @@
 <html>
 <head>
     <title>Copewell Data</title>
-    <style type="text/css">
-        h1{
-            text-align: center;
-        }
-        h3{
-            margin-left: 20px;
-        }
-        a{
-            text-decoration: none;
-            color: #2980b9;
-        }
-        body{
-            counter-reset: chapter 0;
-            padding: 15px;
-        }
-        h2{
-            counter-reset: sub-chapter 0;
-        }
-        h2:before{
-            counter-increment: chapter;
-            content: counter(chapter) ". ";
-        }
-        h3:before{
-            counter-increment: sub-chapter;
-            content: counter(chapter) "." counter(sub-chapter) ": ";
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="public/main.css">
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
