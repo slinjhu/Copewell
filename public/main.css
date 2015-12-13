@@ -15,6 +15,7 @@ a{
 body{
     counter-reset: chapter 0;
     padding: 15px;
+    font-family: 'Lato', sans-serif;
 }
 h2{
     counter-reset: sub-chapter 0;
