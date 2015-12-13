@@ -21,10 +21,9 @@ scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
         x(x>0) = scale01(log(x(x>0)));
     end
     function [x, lambda] = trans_boxcox(x)
-        % Transform positive data using Box Cox and set other to zero
-        [xpos, lambda] = boxcox(x(x>0));
+        % Replace negative with zero, and transform using Box Cox
         x(x<0) = 0;
-        x(x>0) = xpos;
+        [x, lambda] = boxcox(x + eps);
     end
 %% Load and save data
     function data = load_data(id)
