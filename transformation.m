@@ -29,7 +29,6 @@ scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
     end
 
 %% Define function in printing html
-get_style = @()'<style type="text/css">img{height:200; margin:3px;}</style>';
     function print_number(name, value, filter)
         flag = value > filter;
         if flag
@@ -66,7 +65,11 @@ get_style = @()'<style type="text/css">img{height:200; margin:3px;}</style>';
     end
 %% Load data and try transformations
 fid = fopen('public/transformation.html', 'w');
-fprintf(fid, get_style());
+fprintf(fid, '<head><title>Transformations</title></head>');
+fprintf(fid, '<h1><a href="">Transformations</a><a href="../">Home</a></h1>');
+fprintf(fid, '<link rel="stylesheet" type="text/css" href="main.css">');
+fprintf(fid, '<style type="text/css">img{height:200;}</style>');
+    
 fprintf(fid, '<table border="1">');
 ids = natdir('data/*.csv');
 

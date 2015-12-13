@@ -61,7 +61,11 @@ toplot = {{'3 4 5 6', 'Economy'};
     {'73 74 75 76 77 78', 'Social Cohesion'}};
 
 fid = fopen('public/covvar.html', 'w');
+fprintf(fid, '<head><title>Covariance</title></head>');
+fprintf(fid, '<h1><a href="">Covariance and Correlation</a><a href="../">Home</a></h1>');
+fprintf(fid, '<link rel="stylesheet" type="text/css" href="main.css">');
 fprintf(fid, '<style type="text/css">img{height:350;}</style>');
+
 fprintf(fid, '<table border=1>');
 fprintf(fid, '<tr><th>Subdomain</th> <th>Covariance</th> <th>Correlation</th> <th>Cronbach''s alpha</th> </tr>');
 

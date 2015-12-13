@@ -1,6 +1,10 @@
 h1{
     text-align: center;
 }
+h1 a{
+    margin-right: 20px;
+    margin-left: 20px;
+}
 h3{
     margin-left: 20px;
 }
