@@ -1,4 +1,4 @@
-clear, clc
+clear, clc, close all
 !rm data_scaled/*.csv
 ids = natdir('data/*.csv');
 for i = 1:length(ids)
@@ -11,7 +11,8 @@ for i = 1:length(ids)
     
     % Box Cox transformation
     x(x<0) = 0;
-    [x, lambda] = boxcox(x+eps);
+    [xpos, lambda] = boxcox(x(x>0));
+    x(x>0) = xpos;
     
     % Truncation in both ends using 3 std
     right_target = mean(x) + 3*std(x);
@@ -23,5 +24,6 @@ for i = 1:length(ids)
     x = (x - min(x)) / range(x);
     T{:, 'value'} = x;
     writetable(T, outfilename);
+    disp(filename);
 end
 

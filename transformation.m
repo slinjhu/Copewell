@@ -23,7 +23,8 @@ scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
     function [x, lambda] = trans_boxcox(x)
         % Replace negative with zero, and transform using Box Cox
         x(x<0) = 0;
-        [x, lambda] = boxcox(x + eps);
+        [xpos, lambda] = boxcox(x(x>0));
+        x(x>0) = xpos;
     end
 
 %% Define function in printing html
