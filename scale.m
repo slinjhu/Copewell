@@ -10,6 +10,7 @@ for i = 1:length(ids)
     data = T{:, 'value'};
     data(data<0) = 0;
     [data, lambda] = boxcox(data+eps);
+    data = (data - min(data)) / range(data);
     T{:, 'value'} = data;
     writetable(T, outfilename);
 end
