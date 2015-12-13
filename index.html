@@ -2,12 +2,31 @@
 <head>
     <title>Copewell Data</title>
     <style type="text/css">
-    a{
-        color: #2980b9;
-    }
-    a:link {
-        text-decoration: none;
-    }
+        h1{
+            text-align: center;
+        }
+        h3{
+            margin-left: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: #2980b9;
+        }
+        body{
+            counter-reset: chapter 0;
+            padding: 15px;
+        }
+        h2{
+            counter-reset: sub-chapter 0;
+        }
+        h2:before{
+            counter-increment: chapter;
+            content: counter(chapter) ". ";
+        }
+        h3:before{
+            counter-increment: sub-chapter;
+            content: counter(chapter) "." counter(sub-chapter) ": ";
+        }
     </style>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
@@ -25,44 +44,42 @@
 </head>
 
 <body>
-    <h1><a href="http://slinjhu.github.io/CopewellData">Copewell Data</a></h1>
+<h1><a href="http://slinjhu.github.io/CopewellData">Copewell Data</a></h1>
 
-    <h2>Maps</h2>
-    <ul>
-        <li><a href="public/map.html" target=_blank>Maps of original and scaled measures</a></li>
-    </ul>
-
-    <h2>Histograms</h2>
-    <ul>
-        <li><a href="public/transformation.html" target=_blank>Results of various transformation</a></li>
-    </ul>
-
-    <h2>Subdomain</h2>
-    <ul>
-        <li><a href="public/covvar.html" target=_blank>Covariance and correlation</a></br>
-            <ul>
-                <li><b>Covariance</b>: $cov(X, Y) = E[(X - E[X]) \cdot (Y - E[Y]) ]$</li>
-                <li><b>Cronbach's alpha</b>: a measure of internal consistency</li>
-            </ul>
-        </li>
-    </ul>
+<h2>Maps</h2>
+<h3><a href="public/map.html" target=_blank>Maps of original and scaled measures</a></h3>
 
 
-    <h2>Download statistics</h2>
-    <ul>
-        <li><a href="public/data.csv">Statistics of original data</a></li>
-        <li><a href="public/data_scaled.csv">Statistics of scaled data</a></li>
-    </ul>
-    <p>Definitions:
-    <ul>
-        <li><b>Mean</b>: $ \mu = E[X] $
-        </li>
-        <li><b>STD</b> (Standard deviation): $\sigma = \sqrt{E[(X-\mu)^2]}$
-        </li>
-        <li><b>Skewness</b> (third standardized moment): $\gamma_1 = E\left[ \left( {X-\mu\over\sigma} \right)^3 \right] $
-        </li>
-    </ul>
-    </p>
+<h2>Histograms</h2>
+<h3><a href="public/transformation.html" target=_blank>Results of various transformation</a></h3>
+
+
+<h2>Subdomain</h2>
+
+<h3><a href="public/covvar.html" target=_blank>Covariance and correlation</a></h3>
+<ul>
+    <li><b>Covariance</b>: $cov(X, Y) = E[(X - E[X]) \cdot (Y - E[Y]) ]$</li>
+    <li><b>Cronbach's alpha</b>: a measure of internal consistency</li>
+</ul>
+
+
+
+
+<h2>Download statistics</h2>
+
+    <h3><a href="public/data.csv">Statistics of original data</a></h3>
+    <h3><a href="public/data_scaled.csv">Statistics of scaled data</a></h3>
+
+<p>Definitions:
+<ul>
+    <li><b>Mean</b>: $ \mu = E[X] $
+    </li>
+    <li><b>STD</b> (Standard deviation): $\sigma = \sqrt{E[(X-\mu)^2]}$
+    </li>
+    <li><b>Skewness</b> (third standardized moment): $\gamma_1 = E\left[ \left( {X-\mu\over\sigma} \right)^3 \right] $
+    </li>
+</ul>
+</p>
 
 </body>
 </html>
