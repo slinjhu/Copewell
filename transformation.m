@@ -76,12 +76,11 @@ for i = 1:length(ids)
     id = ids{i};
     data = load_data(id);
     %% Print
-    fprintf(fid, '<tr>', id);
+    fprintf(fid, '<tr>');
     
     fprintf(fid, '<th>ID</br>%s</th>', id);
     print_number('Coef. Var', std(data)/mean(data), 1);
     print_number('Skew', skewness(data), 1);
-    
     
     % Original
     plot_hist(data, 'Original');
@@ -105,12 +104,9 @@ for i = 1:length(ids)
     save_plot('log');
     
     % Box-Cox
-    
     plot_hist(bcdata, sprintf('Box Cox (\\lambda=%1.3f)', lambda));
     save_plot('boxcox');
-    
-    
-    
+
     fprintf(fid, '</tr>');
     
 end
