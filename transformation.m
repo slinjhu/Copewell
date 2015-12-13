@@ -22,9 +22,10 @@ scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
     end
     function [x, lambda] = trans_boxcox(x)
         % Replace negative with zero, and transform using Box Cox
-        x(x<0) = 0;
-        [xpos, lambda] = boxcox(x(x>0));
-        x(x>0) = xpos;
+        flag_pos = (x>0);
+        [xpos, lambda] = boxcox(x(flag_pos));
+        x(~flag_pos) = min(xpos);
+        x(flag_pos) = xpos;
     end
 
 %% Define function in printing html
@@ -68,8 +69,10 @@ fid = fopen('public/transformation.html', 'w');
 fprintf(fid, get_style());
 fprintf(fid, '<table border="1">');
 ids = natdir('data/*.csv');
+
 for i = 1:length(ids)
     id = ids{i};
+    disp(id);
     filename = sprintf('data/%s.csv', id);
     T = readtable(filename);
     data = T{:,'value'};

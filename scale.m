@@ -10,9 +10,10 @@ for i = 1:length(ids)
     x = T{:, 'value'};
     
     % Box Cox transformation
-    x(x<0) = 0;
-    [xpos, lambda] = boxcox(x(x>0));
-    x(x>0) = xpos;
+    flag_pos = (x>0);
+    [xpos, lambda] = boxcox(x(flag_pos));
+    x(~flag_pos) = min(xpos);
+    x(flag_pos) = xpos;
     
     % Truncation in both ends using 3 std
     right_target = mean(x) + 3*std(x);
@@ -22,6 +23,7 @@ for i = 1:length(ids)
     
     % scale to [0,1]
     x = (x - min(x)) / range(x);
+    
     T{:, 'value'} = x;
     writetable(T, outfilename);
     disp(filename);
