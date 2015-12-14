@@ -1,7 +1,11 @@
 # Copewell Data
 
-This project holds the data for Copewell project.
+## About
+This project holds the data for Copewell project. 
 
+- **Home page**: <http://slinjhu.github.io/CopewellData>
+
+## Interface
 - **Input**: Raw data files in the `data` folder. All data files must be in csv format with the filename meaning measure ID. The file takes the following form: 
 
 ```
