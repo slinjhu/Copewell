@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map</title>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="mapdraw.js"></script>
+    <style type="text/css">
+    .map{
+        border: 1px solid green;
+        max-width: 1000px;
+        min-width: 1000px;
+        margin: 0px;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+<h1>
+    <a href="">Map viewer</a>
+    <a href="../">Home</a>
+</h1>
+
+    <p>
+        Measure to plot: 
+        <select id="measure" onchange="update();">
+            <option value="1">[1] % households with Internet service</option>
+            <option value="3">[3] # banking companies per 10k pop</option>
+            <option value="4">[4] # jobs per capita</option>
+            <option value="5">[5] Median household income</option>
+            <option value="6">[6] # employers per 10k pop</option>
+            <option value="7">[7] Pupil/Teacher Ratio (Public School)</option>
+            <option value="8">[8] # public schools per 10k pop</option>
+            <option value="9">[9] # public school teachers per 1k pop</option>
+            <option value="10">[10] Average # students per public school</option>
+            <option value="11">[11] # grocery stores per 10k pop</option>
+            <option value="12">[12] # grocery stores per 100 square mile</option>
+            <option value="14">[14] % households on public water</option>
+            <option value="15">[15] Per capita federal government spending ($1k)</option>
+            <option value="16">[16] % incomes in government employment</option>
+            <option value="17">[17] # governments and special districts in county per 1k pop</option>
+            <option value="18">[18] % in federal, state, and local government employment</option>
+            <option value="19">[19] % vacant houses</option>
+            <option value="20">[20] # traveler's accommodations per 10k pop</option>
+            <option value="21">[21] # dwelling units per 10k pop</option>
+            <option value="22">[22] % vacant rental units</option>
+            <option value="23">[23] # physicians per 10k pop</option>
+            <option value="24">[24] # hospital beds per 10k pop</option>
+            <option value="25a">[25a] % women on medicare with mammogram</option>
+            <option value="25b">[25b] % women on medicare with diabetes</option>
+            <option value="26">[26] % uninsured adults</option>
+            <option value="30">[30] % children with single parent</option>
+            <option value="31">[31] % households with one person</option>
+            <option value="32">[32] # nursing homes per 100k pop</option>
+            <option value="38">[38] % walk or cycle to work</option>
+            <option value="42">[42] All cause mortality per 100k pop</option>
+            <option value="43">[43] % self-reported excellent or very good health</option>
+            <option value="44">[44] Well-being of life (Average Life expectency)</option>
+            <option value="45">[45] # bridges per 100 square mile</option>
+            <option value="48">[48] Average age of housing stock</option>
+            <option value="49">[49] % housing units that are not mobile homes</option>
+            <option value="50a">[50a] Median residential download speed (mbps)</option>
+            <option value="50b">[50b] Median mobile download speed (mbps)</option>
+            <option value="51">[51] % bridges with structural deficiencies</option>
+            <option value="52">[52] % bridges that are obsolete</option>
+            <option value="54">[54] % pop affected by water violation of those served by public water system</option>
+            <option value="55">[55] % children in pop (<18 years old)</option>
+            <option value="56">[56] % elderlies in pop (>85 years old)</option>
+            <option value="57">[57] % pop in institutions</option>
+            <option value="60">[60] % pop with sensory, physical, or mental disability</option>
+            <option value="63">[63] Income inequality</option>
+            <option value="64">[64] % pop with less than high school education</option>
+            <option value="65">[65] % pop not in the labor force</option>
+            <option value="66">[66] % pop in poverty</option>
+            <option value="67">[67] % civilian unemployed</option>
+            <option value="68">[68] % housing units in a county without a car and more than 1 mile from a supermarket, supercenter or large grocery store. </option>
+            <option value="69">[69] % pop on public assistance and food stamps</option>
+            <option value="73">[73] % pop who use carpool to work</option>
+            <option value="74">[74] % pop affiliated with religious group</option>
+            <option value="75">[75] # religious buildings per 100 square mile</option>
+            <option value="76">[76] % pop who drive to work alone</option>
+            <option value="77">[77] # net International migration</option>
+            <option value="78">[78] # social advocacy organizations per 10k pop</option>
+            <option value="902">[902] Earthquake; Spectral Acceleration (%g)</option>
+            <option value="901">[901] pop</option>
+        </select>
+    </p>
+    <p>
+        Type: 
+        <select id="folder" onchange="update();">
+            <option value="data">Raw</option>
+            <option value="data_scaled">Scaled</option>
+        </select>
+    </p>
+    <div id="map" class="map"></div>
+
+    <script type="text/javascript">
+    update();
+    function update(){
+        var id = $("#measure option:selected").val();
+        var folder = $("#folder option:selected").val();
+        var filename = "../" + folder + "/" + id + ".csv";
+
+        var folderText = $("#folder option:selected").html();
+        var measureText = $("#measure option:selected").html();
+        var title = folderText + " " + measureText;
+
+        mapdraw("#map", filename, title);
+    }
+
+    </script>
+
+</body>
+
+</html>
+
