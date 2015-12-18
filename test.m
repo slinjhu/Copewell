@@ -1,10 +1,12 @@
-clear, clc
-ids = natdir('data/*.csv');
-fid = fopen('test.html', 'w');
-for i = 1:length(ids)
-    id = ids{i};
+clear, close all, clc
+SD = load_list('list.xlsx');
+fields = fieldnames(SD);
+for i_toplot = 2
+    sd = fields{i_toplot};
+    [arr, measures] = fetch_data(SD.(sd));
     
-    fprintf(fid, '<a href="data/%s.csv">%s</a>, ', id, id);
-    
+    %plotPairs(arr, measures, sd);
+    plotCov(arr, measures, sd);
 end
-fclose(fid);
+
+
