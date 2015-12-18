@@ -9,7 +9,7 @@ for i = 1:length(ids)
     id = ids{i};
 
     % load data
-    filename = sprintf('data/%s.csv', id);
+    filename = sprintf('%s/%s.csv', data_name, id);
     T = readtable(filename);
     data = T{:,'value'};
     

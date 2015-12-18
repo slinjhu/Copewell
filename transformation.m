@@ -4,14 +4,14 @@ clc
 %% Define scale and transformation functions
 scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
     function x = trunc_right(x)
-        % Truncation in right end using 3std
-        right_target = mean(x) + 3*std(x);
+        % Truncation in right end using 3.5std
+        right_target = mean(x) + 3.5*std(x);
         x(x > right_target) = right_target;
     end
     function x = trunc_both(x)
-        % Truncation in both ends using 3 std
-        right_target = mean(x) + 3*std(x);
-        left_target = mean(x) - 3*std(x);
+        % Truncation in both ends using 3.5 std
+        right_target = mean(x) + 3.5*std(x);
+        left_target = mean(x) - 3.5*std(x);
         x(x > right_target) = right_target;
         x(x < left_target) = left_target;
     end
@@ -22,10 +22,11 @@ scale01 = @(x)(x - min(x)) / range(x); % scale to [0,1]
     end
     function [x, lambda] = trans_boxcox(x)
         % Replace negative with zero, and transform using Box Cox
-        flag_pos = (x>0);
-        [xpos, lambda] = boxcox(x(flag_pos));
-        x(~flag_pos) = min(xpos);
-        x(flag_pos) = xpos;
+        %         flag_pos = (x>0);
+        %         [xpos, lambda] = boxcox(x(flag_pos));
+        %         x(~flag_pos) = min(xpos);
+        %         x(flag_pos) = xpos;
+        [x, lambda] = boxcox(x(x>0));
     end
 
 %% Define function in printing html
@@ -69,7 +70,7 @@ fprintf(fid, '<head><title>Transformations</title></head>');
 fprintf(fid, '<h1><a href="">Transformations</a><a href="../">Home</a></h1>');
 fprintf(fid, '<link rel="stylesheet" type="text/css" href="main.css">');
 fprintf(fid, '<style type="text/css">img{height:200;}</style>');
-    
+
 fprintf(fid, '<table border="1">');
 ids = natdir('data/*.csv');
 
@@ -81,7 +82,7 @@ for i = 1:length(ids)
     data = T{:,'value'};
     
     %% Print
-    fprintf(fid, '<tr>');    
+    fprintf(fid, '<tr>');
     fprintf(fid, '<th>ID</br>%s</th>', id);
     print_number('Coef. Var', std(data)/mean(data), 1);
     print_number('Skew', skewness(data), 1);
@@ -90,17 +91,17 @@ for i = 1:length(ids)
     plot_hist(data, 'Original');
     save_plot('org');
     
-    % Box-Cox and +- 3std
+    % Box-Cox and +- 3.5std
     [bcdata, lambda] = trans_boxcox(data);
-    plot_hist(trunc_both(bcdata), 'Box-Cox & truncated with \pm3std');
+    plot_hist(trunc_both(bcdata), 'Box-Cox & truncated with \pm3.5 std');
     save_plot('boxcoxstd');
     
     % +3std
-    plot_hist(trunc_right(data), 'Truncated with +3std');
+    plot_hist(trunc_right(data), 'Truncated with +3.5 std');
     save_plot('+3std');
     
     % +-3std
-    plot_hist(trunc_both(data), 'Truncated with \pm3std');
+    plot_hist(trunc_both(data), 'Truncated with \pm3.5 std');
     save_plot('+-3std');
     
     % log
@@ -110,7 +111,7 @@ for i = 1:length(ids)
     % Box-Cox
     plot_hist(bcdata, sprintf('Box Cox (\\lambda=%1.3f)', lambda));
     save_plot('boxcox');
-
+    
     fprintf(fid, '</tr>');
     
 end

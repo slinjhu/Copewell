@@ -7,17 +7,17 @@ for i = 1:length(ids)
     outfilename = sprintf('data_scaled/%s.csv', id);
     
     T = readtable(filename);
+    flag_neg = (T{:, 'value'} <= 0);
+    T(flag_neg, :) = [];
+    
     x = T{:, 'value'};
     
-    % Box Cox transformation
-    flag_pos = (x>0);
-    [xpos, lambda] = boxcox(x(flag_pos));
-    x(~flag_pos) = min(xpos);
-    x(flag_pos) = xpos;
+    % Box Cox transformation    
+    [x, lambda] = boxcox(x);
     
     % Truncation in both ends using 3 std
-    right_target = mean(x) + 3*std(x);
-    left_target = mean(x) - 3*std(x);
+    right_target = mean(x) + 3.5*std(x);
+    left_target = mean(x) - 3.5*std(x);
     x(x > right_target) = right_target;
     x(x < left_target) = left_target;
     

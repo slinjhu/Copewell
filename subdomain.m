@@ -10,7 +10,7 @@ fid = fopen('public/covvar.html', 'w');
 fprintf(fid, '<head><title>Covariance</title></head>');
 fprintf(fid, '<h1><a href="">Covariance and Correlation</a><a href="../">Home</a></h1>');
 fprintf(fid, '<link rel="stylesheet" type="text/css" href="main.css">');
-fprintf(fid, '<style type="text/css">img{height:300;}</style>');
+fprintf(fid, '<style type="text/css">img{height:500;}</style>');
 
 fprintf(fid, '<table border=1>');
 fprintf(fid, '<tr> <th>Covariance</th> <th>Pearson''s Correlation</th> <th>Cronbach''s alpha</th> </tr>');
@@ -31,10 +31,10 @@ for i_toplot = 1:length(fields)
         % calculate Cronbach's alpha
         K = size(arr, 2);
         alpha = (K/(K-1)) * (1 - sum(std(arr).^2 ) / std(sum(arr, 2))^2 );
-        fprintf(fid, td_wrap_number(0.7, alpha));
+        fprintf(fid, td_wrap_number(0.5, alpha));
+        fprintf('%s\t%1.3f\n', sd, alpha);
         
         fprintf(fid, '</tr>');
-        disp(sd);
     end
 end
 fclose(fid);
