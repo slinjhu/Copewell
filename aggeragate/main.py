@@ -3,7 +3,7 @@ This file prepares data for the app.
 """
 import sqlite3
 import csv
-import xlrd
+import pandas.io.sql as sql
 import os
 import pandas
 import numpy
@@ -71,9 +71,24 @@ class DB():
         result = self.c.fetchall()
         return [item[0] for item in result]
 
+    def export(self):
+        for domain in self.get_all_id('domain'):
+            table = sql.read_sql('select fips, value from DomainData where id=\'{}\''.format(domain), self.conn)
+
+            # scale to [0,1]
+            x = table['value']
+            table['value'] = (x - x.min()) / (x.max() - x.min())
+
+            table.to_csv('../data_domain/{}.csv'.format(domain), index=False)
+        for subdomain in self.get_all_id('subdomain'):
+            table = sql.read_sql('select fips, value from SubdomainData where id=\'{}\''.format(subdomain), self.conn)
+            table.to_csv('../data_subdomain/{}.csv'.format(subdomain), index=False)
+        table = sql.read_sql('select * from DomainOut', self.conn)
+        table.to_csv('../data_domain/all.csv', index=False)
 
 
 db = DB('copewell.db')
+db.export()
 
 
 

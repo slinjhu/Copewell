@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map</title>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="mapdraw.js"></script>
+    <style type="text/css">
+    .map{
+        border: 1px solid green;
+        max-width: 1000px;
+        min-width: 1000px;
+        margin: 0px;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+<h1>
+    <a href="">Domain Map</a>
+    <a href="../">Home</a>
+</h1>
+
+    <p>
+        Measure to plot: 
+        <select id="toshow" onchange="update();">
+            <option value="CF">Community Functioning</option>
+            <option value="Event">Event</option>
+            <option value="PM">Prevention Mitigation</option>
+            <option value="PVID">Population Vulnerability Inequality Deprivation</option>
+            <option value="SC">Social Cohesion</option>
+
+        </select>
+    </p>
+
+    <div id="map" class="map"></div>
+
+    <script type="text/javascript">
+    update();
+    function update(){
+        var id = $("#toshow option:selected").val();
+
+        var filename = "../data_domain/" + id + ".csv";
+
+        var toshowText = $("#toshow option:selected").html();
+        var title = toshowText;
+
+        mapdraw("#map", filename, title, 0, 1);
+    }
+
+    </script>
+
+</body>
+
+</html>
+

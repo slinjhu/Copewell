@@ -10,6 +10,7 @@ SELECT fips, dId AS id, AVG(value) AS value
 FROM SubdomainData JOIN SubdomainInfo ON SubdomainData.id = SubdomainInfo.id
 GROUP BY fips, dId;
 
+
 -- Create table where domains are in columns
 DROP TABLE IF EXISTS DomainOut;
 CREATE TABLE DomainOut AS
