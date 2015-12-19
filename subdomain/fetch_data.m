@@ -7,15 +7,6 @@ for i = 1:length(measureList)
     
     T = readtable(filename);
     
-    switch direction
-        case '+'
-            % do nothing
-        case '-'
-            T{:, 'value'} = 1 - T{:, 'value'};
-        otherwise
-            error
-    end
-    
     T.Properties.VariableNames{'value'} = ['measure', id];
     if i == 1
         Tall = T;

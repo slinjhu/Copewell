@@ -1,4 +1,5 @@
 clear, close all, clc
+addpath(genpath('.'));
 SD = load_list('list.xlsx');
 fields = fieldnames(SD);
 for i_toplot = 2

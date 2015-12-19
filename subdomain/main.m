@@ -1,4 +1,5 @@
 clear, clc
+addpath(genpath('../'));
 %! rm covariance/*.jpg
 %! rm pairs/*.jpg
 

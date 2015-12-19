@@ -13,4 +13,3 @@ for i = 2:size(raw, 1)
         SD.(subdomain) = idstr;
     end
 end
-end

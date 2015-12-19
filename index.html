@@ -22,33 +22,15 @@
 <body>
 <h1><a href="http://slinjhu.github.io/CopewellData">Copewell Data</a></h1>
 
-<h2>Maps</h2>
-<h3><a href="map/index.html" target=_blank>Maps of raw and scaled measures</a></h3>
-
-
-<h2>Tansformation</h2>
-<h3><a href="transformation/index.html" target=_blank>Histograms of various transformation</a></h3>
-
-<h2>Subdomain analysis</h2>
-
-<h3><a href="subdomain/index.html" target=_blank>Covariance and correlation</a></h3>
-<p>
-<ul>
-    <li><b>Covariance</b>: $\mbox{cov}(X, Y) = E[(X - E[X]) \cdot (Y - E[Y]) ]$</li>
-    <li><b>Pearson's correlation coefficient</b>: $\rho_{X,Y} = \mbox{cov}(X,Y) / (\sigma_X \sigma_Y)$</li>
-    <li><b>Cronbach's alpha</b>: a measure of internal consistency. Suppose we have $X = Y_1 + Y_2 +\dots + Y_K$, then:
-        \[ \alpha = {K\over K-1} \left( 1 - {\sum_{i-1}^K \sigma^2_{Y_i} \over \sigma^2_X } \right) \]
-        Usually $\alpha \ge 0.7$ means acceptable and $\alpha \le 0.5$ means not acceptable.
-    </li>
-</ul>
-</p>
-
-
-
 <h2>Data</h2>
+<h3><a href="map/index.html" target=_blank>Maps of raw and scaled measures</a></h3>
+<h3>
+    Statistics of
+    <a href="statistics/data.html" target="_blank">raw data</a>
+    and
+    <a href="statistics/data_scaled.html" target="_blank">scaled data</a>
+</h3>
 
-<h3><a href="statistics/data.html" target="_blank">Statistics of raw data</a></h3>
-<h3><a href="statistics/data_scaled.html" target="_blank">Statistics of scaled data</a></h3>
 <h3>Download raw measure data</h3>
 <p><a href="data/1.csv">1</a>, <a href="data/3.csv">3</a>, <a href="data/4.csv">4</a>, <a href="data/5.csv">5</a>, <a href="data/6.csv">6</a>, <a href="data/7.csv">7</a>, <a href="data/8.csv">8</a>, <a href="data/9.csv">9</a>, <a href="data/10.csv">10</a>, <a href="data/11.csv">11</a>, <a href="data/12.csv">12</a>, <a href="data/14.csv">14</a>, <a href="data/15.csv">15</a>, <a href="data/16.csv">16</a>, <a href="data/17.csv">17</a>, <a href="data/18.csv">18</a>, <a href="data/19.csv">19</a>, <a href="data/20.csv">20</a>, <a href="data/21.csv">21</a>, <a href="data/22.csv">22</a>, <a href="data/23.csv">23</a>, <a href="data/24.csv">24</a>, <a href="data/25a.csv">25a</a>, <a href="data/25b.csv">25b</a>, <a href="data/26.csv">26</a>, <a href="data/30.csv">30</a>, <a href="data/31.csv">31</a>, <a href="data/32.csv">32</a>, <a href="data/38.csv">38</a>, <a href="data/42.csv">42</a>, <a href="data/43.csv">43</a>, <a href="data/44.csv">44</a>, <a href="data/45.csv">45</a>, <a href="data/48.csv">48</a>, <a href="data/49.csv">49</a>, <a href="data/50a.csv">50a</a>, <a href="data/50b.csv">50b</a>, <a href="data/51.csv">51</a>, <a href="data/52.csv">52</a>, <a href="data/54.csv">54</a>, <a href="data/55.csv">55</a>, <a href="data/56.csv">56</a>, <a href="data/57.csv">57</a>, <a href="data/60.csv">60</a>, <a href="data/63.csv">63</a>, <a href="data/64.csv">64</a>, <a href="data/65.csv">65</a>, <a href="data/66.csv">66</a>, <a href="data/67.csv">67</a>, <a href="data/68.csv">68</a>, <a href="data/69.csv">69</a>, <a href="data/73.csv">73</a>, <a href="data/74.csv">74</a>, <a href="data/75.csv">75</a>, <a href="data/76.csv">76</a>, <a href="data/77.csv">77</a>, <a href="data/78.csv">78</a>, <a href="data/901.csv">901</a>, <a href="data/902.csv">902</a> </p>
 
@@ -64,6 +46,26 @@
     <li><b>CV</b> (Coefficient of Variation, aka relative standard deviation): $\sigma / \mu$ </li>
 </ul>
 </p>
+
+
+<h2>Pre processing</h2>
+<h3><a href="transformation/index.html" target=_blank>Histograms of various transformation</a></h3>
+
+<h3><a href="subdomain/index.html" target=_blank>Covariance, correlation and Cronbach's alpha</a></h3>
+<p>
+<ul>
+    <li><b>Covariance</b>: $\mbox{cov}(X, Y) = E[(X - E[X]) \cdot (Y - E[Y]) ]$</li>
+    <li><b>Pearson's correlation coefficient</b>: $\rho_{X,Y} = \mbox{cov}(X,Y) / (\sigma_X \sigma_Y)$</li>
+    <li><b>Cronbach's alpha</b>: a measure of internal consistency. Suppose we have $X = Y_1 + Y_2 +\dots + Y_K$, then:
+        \[ \alpha = {K\over K-1} \left( 1 - {\sum_{i-1}^K \sigma^2_{Y_i} \over \sigma^2_X } \right) \]
+        Usually $\alpha \ge 0.7$ means acceptable and $\alpha \le 0.5$ means not acceptable.
+    </li>
+</ul>
+</p>
+
+
+
+
 
 <h2>View source code</h2>
 <p>

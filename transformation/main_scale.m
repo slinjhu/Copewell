@@ -1,8 +1,11 @@
 clear, clc, close all
 !rm ../data_scaled/*.csv
-ids = natdir('../data/*.csv');
-for i = 1:length(ids)
-    id = ids{i};
+
+[~,~,raw] = xlsread('../list.xlsx');
+for i = 2:size(raw, 1)
+    direction = raw{i, 5};
+    id = num2str(raw{i, 1});
+    
     filename = sprintf('../data/%s.csv', id);
     outfilename = sprintf('../data_scaled/%s.csv', id);
     
@@ -24,6 +27,10 @@ for i = 1:length(ids)
     % scale to [0,1]
     x = (x - min(x)) / range(x);
     
+    if direction == '-'
+        x = 1 -x;
+    end
+
     T{:, 'value'} = x;
     writetable(T, outfilename);
     disp(filename);
