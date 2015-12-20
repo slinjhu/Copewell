@@ -62,7 +62,7 @@ Choropleth.prototype.addLegend = function(countydata){
     .style('border-top-color', function(d){
         return countydata.valueToColor(d);
     })
-    .text(function(d) {return parseFloat(d.toFixed(1));});
+    .text(function(d) {return parseFloat(d.toFixed(2));});
 }
 
 

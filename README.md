@@ -1,4 +1,4 @@
-# Copewell Data
+# Copewell Project
 
 ## About
 This project holds the data for Copewell project. 

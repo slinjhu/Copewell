@@ -23,7 +23,7 @@
 <h1><a href="http://slinjhu.github.io/CopewellData">Copewell Data</a></h1>
 
 <h2>Data</h2>
-<h3><a href="map/index.html" target=_blank>Maps of raw and scaled measures</a></h3>
+<h3>Maps of <a href="map/measures.html" target=_blank>measures</a></h3>
 <h3>
     Statistics of
     <a href="statistics/data.html" target="_blank">raw data</a>
@@ -64,7 +64,17 @@
 </p>
 
 
-
+<h2>Domain aggregation</h2>
+<h3>Maps of <a href="map/domain.html" target=_blank>domains</a></h3>
+<h3>Aggregation process</h3>
+<p><ol>
+    <li>Treat negatives and zeros as missing value</li>
+    <li>Box-Cox transform each measures</li>
+    <li>Truncate with $\pm3.5$ std</li>
+    <li>Adjust for direction</li>
+    <li>Calculate mean of available measures in each subdomain</li>
+    <li>Calculate mean of all available subdomains in each domain</li>
+</ol></p>
 
 
 <h2>View source code</h2>

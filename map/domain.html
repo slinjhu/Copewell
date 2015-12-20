@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Map</title>
+    <title>Domain Map</title>
     <meta charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../main.css">
@@ -26,18 +26,20 @@
     <a href="../">Home</a>
 </h1>
 
-    <p>
-        Measure to plot: 
-        <select id="toshow" onchange="update();">
-            <option value="CF">Community Functioning</option>
-            <option value="Event">Event</option>
-            <option value="PM">Prevention Mitigation</option>
-            <option value="PVID">Population Vulnerability Inequality Deprivation</option>
-            <option value="SC">Social Cohesion</option>
-
-        </select>
-    </p>
-
+<p>
+    Domain to plot:
+    <select id="toshow" onchange="update();">
+        <option value="CF">Community Functioning</option>
+        <option value="Event">Event</option>
+        <option value="PM">Prevention Mitigation</option>
+        <option value="PVID">Population Vulnerability Inequality Deprivation</option>
+        <option value="SC">Social Cohesion</option>
+    </select>
+</p>
+<p>
+    <input type="checkbox" id="minmax" checked onchange="update();">
+    Range from min to max
+</p>
     <div id="map" class="map"></div>
 
     <script type="text/javascript">
@@ -50,7 +52,11 @@
         var toshowText = $("#toshow option:selected").html();
         var title = toshowText;
 
-        mapdraw("#map", filename, title, 0, 1);
+        if($("#minmax").is(':checked')){
+            mapdraw("#map", filename, title);
+        }else{
+            mapdraw("#map", filename, title, 0, 1);
+        }
     }
 
     </script>

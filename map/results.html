@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result Map</title>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="mapdraw.js"></script>
+    <style type="text/css">
+    .map{
+        border: 1px solid green;
+        max-width: 1000px;
+        min-width: 1000px;
+        margin: 0px;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+<h1>
+    <a href="">Result Maps</a>
+    <a href="../">Home</a>
+</h1>
+
+<p>
+    Measure to plot:
+    <select id="toshow" onchange="update();">
+        <option value="Resilience (absolute)">Resilience (absolute)</option>
+        <option value="Resilience (relative)">Resilience (relative)</option>
+        <option value="RecoveryRate">RecoveryRate</option>
+        <option value="Resistance">Resistance</option>
+        <option value="Absolute CF at Month 01">Absolute CF at Month 01</option>
+        <option value="Absolute CF at Month 02">Absolute CF at Month 02</option>
+        <option value="Absolute CF at Month 03">Absolute CF at Month 03</option>
+        <option value="Absolute CF at Month 04">Absolute CF at Month 04</option>
+        <option value="Absolute CF at Month 05">Absolute CF at Month 05</option>
+        <option value="Absolute CF at Month 06">Absolute CF at Month 06</option>
+        <option value="Absolute CF at Month 07">Absolute CF at Month 07</option>
+        <option value="Absolute CF at Month 08">Absolute CF at Month 08</option>
+        <option value="Absolute CF at Month 09">Absolute CF at Month 09</option>
+        <option value="Absolute CF at Month 10">Absolute CF at Month 10</option>
+        <option value="Absolute CF at Month 11">Absolute CF at Month 11</option>
+        <option value="Absolute CF at Month 12">Absolute CF at Month 12</option>
+        <option value="Relative CF at Month 01">Relative CF at Month 01</option>
+        <option value="Relative CF at Month 02">Relative CF at Month 02</option>
+        <option value="Relative CF at Month 03">Relative CF at Month 03</option>
+        <option value="Relative CF at Month 04">Relative CF at Month 04</option>
+        <option value="Relative CF at Month 05">Relative CF at Month 05</option>
+        <option value="Relative CF at Month 06">Relative CF at Month 06</option>
+        <option value="Relative CF at Month 07">Relative CF at Month 07</option>
+        <option value="Relative CF at Month 08">Relative CF at Month 08</option>
+        <option value="Relative CF at Month 09">Relative CF at Month 09</option>
+        <option value="Relative CF at Month 10">Relative CF at Month 10</option>
+        <option value="Relative CF at Month 11">Relative CF at Month 11</option>
+        <option value="Relative CF at Month 12">Relative CF at Month 12</option>
+    </select>
+</p>
+<p>
+    Type:
+    <select id="folder" onchange="update();">
+        <option value="results_uniform">Uniform Event</option>
+        <option value="results_earthquake">Earthquake Event</option>
+        <option value="results_pandemic">Pandemic Event</option>
+    </select>
+</p>
+<p>
+    <input type="checkbox" id="minmax" checked onchange="update();">
+    Range from min to max
+</p>
+    <div id="map" class="map"></div>
+
+    <script type="text/javascript">
+    update();
+    function update(){
+        var id = $("#toshow option:selected").val();
+        var folder = $("#folder option:selected").val();
+        var filename = "../solve/" + folder + '/' + id + ".csv";
+
+        var toshowText = $("#toshow option:selected").html();
+        var title = toshowText;
+
+        if($("#minmax").is(':checked')){
+            mapdraw("#map", filename, title);
+        }else{
+            mapdraw("#map", filename, title, 0, 1);
+        }
+
+    }
+
+    </script>
+
+</body>
+
+</html>
+
