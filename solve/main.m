@@ -18,7 +18,8 @@ CF0 = T{:,'CF'};
 CFlog = zeros(N, length(tspan));
 for i_county = 1:N
     fprintf('>>> Calculating county %d\n', i_county);
-    % get initial value
+    % For uniform and pandemic event, use constant Event0; For earthquake
+    % event use Event0 from data. 
     Event0 = 0.5;
     %Event0 = T{i_county, 'Event'};
     

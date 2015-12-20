@@ -1,8 +1,0 @@
-id,description,defaultValue
-CF,Community Functioning,0.5
-PR,Preparedness Response,0.5
-PM,Prevention Mitigation,0.5
-PVID,Population Vulnerability Inequity and Deprivation,0.5
-SC,Social Cohesion,0.5
-Event,Event,0.5
-ER,External Resource,0.5
