@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Result Map</title>
+    <title>CF Time Course Maps</title>
     <meta charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../main.css">
@@ -22,43 +22,9 @@
 </head>
 <body>
 <h1>
-    <a href="">Result Maps</a>
+    <a href="">CF Time Course Maps</a>
     <a href="../">Home</a>
 </h1>
-
-<p>
-    Measure to plot:
-    <select id="toshow" onchange="update();">
-        <option value="Resilience (absolute)">Resilience (absolute)</option>
-        <option value="Resilience (relative)">Resilience (relative)</option>
-        <option value="RecoveryRate">RecoveryRate</option>
-        <option value="Resistance">Resistance</option>
-        <option value="Absolute CF at Month 01">Absolute CF at Month 01</option>
-        <option value="Absolute CF at Month 02">Absolute CF at Month 02</option>
-        <option value="Absolute CF at Month 03">Absolute CF at Month 03</option>
-        <option value="Absolute CF at Month 04">Absolute CF at Month 04</option>
-        <option value="Absolute CF at Month 05">Absolute CF at Month 05</option>
-        <option value="Absolute CF at Month 06">Absolute CF at Month 06</option>
-        <option value="Absolute CF at Month 07">Absolute CF at Month 07</option>
-        <option value="Absolute CF at Month 08">Absolute CF at Month 08</option>
-        <option value="Absolute CF at Month 09">Absolute CF at Month 09</option>
-        <option value="Absolute CF at Month 10">Absolute CF at Month 10</option>
-        <option value="Absolute CF at Month 11">Absolute CF at Month 11</option>
-        <option value="Absolute CF at Month 12">Absolute CF at Month 12</option>
-        <option value="Relative CF at Month 01">Relative CF at Month 01</option>
-        <option value="Relative CF at Month 02">Relative CF at Month 02</option>
-        <option value="Relative CF at Month 03">Relative CF at Month 03</option>
-        <option value="Relative CF at Month 04">Relative CF at Month 04</option>
-        <option value="Relative CF at Month 05">Relative CF at Month 05</option>
-        <option value="Relative CF at Month 06">Relative CF at Month 06</option>
-        <option value="Relative CF at Month 07">Relative CF at Month 07</option>
-        <option value="Relative CF at Month 08">Relative CF at Month 08</option>
-        <option value="Relative CF at Month 09">Relative CF at Month 09</option>
-        <option value="Relative CF at Month 10">Relative CF at Month 10</option>
-        <option value="Relative CF at Month 11">Relative CF at Month 11</option>
-        <option value="Relative CF at Month 12">Relative CF at Month 12</option>
-    </select>
-</p>
 <p>
     Type:
     <select id="folder" onchange="update();">
@@ -68,6 +34,31 @@
     </select>
 </p>
 <p>
+    Absolute or relative:
+    <select id="scale" onchange="update();">
+        <option>Absolute CF</option>
+        <option>Relative CF</option>
+    </select>
+</p>
+<p>
+    Measure to plot:
+    <select id="month" onchange="update();">
+        <option>at Month 01</option>
+        <option>at Month 02</option>
+        <option>at Month 03</option>
+        <option>at Month 04</option>
+        <option>at Month 05</option>
+        <option>at Month 06</option>
+        <option>at Month 07</option>
+        <option>at Month 08</option>
+        <option>at Month 09</option>
+        <option>at Month 10</option>
+        <option>at Month 11</option>
+        <option>at Month 12</option>
+    </select>
+</p>
+
+<p>
     <input type="checkbox" id="minmax" checked onchange="update();">
     Range from min to max
 </p>
@@ -76,13 +67,13 @@
     <script type="text/javascript">
     update();
     function update(){
-        var id = $("#toshow option:selected").val();
+        var month = $("#month option:selected").html();
         var folder = $("#folder option:selected").val();
-        var filename = "../solve/" + folder + '/' + id + ".csv";
+        var scale = $("#scale option:selected").html();
+        var filename = "../solve/" + folder + '/' + scale + ' ' + month + ".csv";
 
-        var toshowText = $("#toshow option:selected").html();
         var eventText = $("#folder option:selected").html();
-        var title = toshowText + ' of ' + eventText;
+        var title = scale + ' ' + month + ' of ' + eventText;
 
         if($("#minmax").is(':checked')){
             mapdraw("#map", filename, title);
