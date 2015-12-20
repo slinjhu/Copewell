@@ -7,7 +7,7 @@ function dW = fdW(t, W)
 % ER: Emergency Management / External Resources
 % PR: Preparadness
 %%
-isPandemic = true;
+isPandemic = false;
 
 global var_list;
 global Event0;
