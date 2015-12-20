@@ -81,7 +81,8 @@
         var filename = "../solve/" + folder + '/' + id + ".csv";
 
         var toshowText = $("#toshow option:selected").html();
-        var title = toshowText;
+        var eventText = $("#folder option:selected").html();
+        var title = toshowText + ' of ' + eventText;
 
         if($("#minmax").is(':checked')){
             mapdraw("#map", filename, title);
