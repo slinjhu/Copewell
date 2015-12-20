@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resilience Map</title>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="mapdraw.js"></script>
+    <style type="text/css">
+    .map{
+        border: 1px solid green;
+        max-width: 1000px;
+        min-width: 1000px;
+        margin: 0px;
+        padding: 10px;
+        float: left;
+        zoom: 60%;
+    }
+
+    </style>
+</head>
+<body>
+<h1>
+    <a href="">Result Maps</a>
+    <a href="../">Home</a>
+</h1>
+
+<p>
+    Type:
+    <select id="folder" onchange="update();">
+        <option value="results_uniform">Uniform Event</option>
+        <option value="results_earthquake">Earthquake Event</option>
+        <option value="results_pandemic">Pandemic Event</option>
+    </select>
+</p>
+<p>
+    <input type="checkbox" id="minmax" checked onchange="update();">
+    Range from min to max
+</p>
+<div id="map1" class="map"></div>
+<div id="map2" class="map"></div>
+<div id="map3" class="map"></div>
+<div id="map4" class="map"></div>
+
+<script type="text/javascript">
+    update();
+    function update(){
+
+        var folder = $("#folder option:selected").val();
+        var eventText = $("#folder option:selected").html();
+
+        var filename1 = "../solve/" + folder + '/Resilience (absolute).csv';
+        var filename2 = "../solve/" + folder + '/Resilience (relative).csv';
+        var filename3 = "../solve/" + folder + '/Resistance.csv';
+        var filename4 = "../solve/" + folder + '/RecoveryRate.csv';
+        var title1 = 'Resilience (absolute) of ' + eventText;
+        var title2 = 'Resilience (relative) of ' + eventText;
+        var title3 = 'Resistance of ' + eventText;
+        var title4 = 'Recovery Rate of ' + eventText;
+
+        if($("#minmax").is(':checked')){
+            mapdraw("#map1", filename1, title1);
+            mapdraw("#map2", filename2, title2);
+            mapdraw("#map3", filename3, title3);
+            mapdraw("#map4", filename4, title4);
+        }else{
+            mapdraw("#map1", filename1, title1, 0, 1);
+            mapdraw("#map2", filename2, title2, 0, 1);
+            mapdraw("#map3", filename3, title3, 0, 1);
+            mapdraw("#map4", filename4, title4);
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>
+
