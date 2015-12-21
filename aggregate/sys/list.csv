@@ -27,7 +27,7 @@ id,description,domain,subdomain
 26,% uninsured adults,CF,Medicine and Healthcare
 30,% children with single parent,CF,Nurturing and Care
 31,% households with one person,CF,Nurturing and Care
-32,# nursing homes per 100k pop,CF,Nurturing and Care
+32,# nursing homes per 10k pop,CF,Nurturing and Care
 38,% walk or cycle to work,CF,Transportation
 42,All cause mortality per 100k pop,CF,Well being
 43,% self-reported excellent or very good health,CF,Well being
