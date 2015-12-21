@@ -25,7 +25,7 @@ class DB():
         FROM MeasureBuffer, SubdomainInfo
         WHERE SubdomainInfo.description = subdomain AND SubdomainInfo.dId = domain;
         """)
-        self.load3_measure_data('../data', 'MeasureData')
+        self.load_measure_data('../data', 'MeasureData')
         self.load_measure_data('../data_scaled', 'MeasureScaledData')
         with open('aggregate.sql', 'rU') as f:
             self.c.executescript(f.read())
