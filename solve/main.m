@@ -16,7 +16,7 @@ Resilience = zeros(N, 1);
 RecoveryRate = zeros(N, 1);
 CF0 = T{:,'CF'};
 CFlog = zeros(N, length(tspan));
-for i_county = 1%:N
+for i_county = 1:N
     fprintf('>>> Calculating county %d\n', i_county);
     % For uniform and pandemic event, use constant Event0; For earthquake
     % event use Event0 from data. 
