@@ -1,7 +1,7 @@
 clear, clc
 addpath(genpath('../'));
-%! rm covariance/*.jpg
-%! rm pairs/*.jpg
+! rm covariance/*.jpg
+! rm pairs/*.jpg
 
 %% Begin of main
 SD = load_list('../list.xlsx');
