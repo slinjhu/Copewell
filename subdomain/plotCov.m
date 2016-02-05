@@ -12,6 +12,7 @@ if ~exist(filename, 'file')
     set(gca, 'YTick', 1:N);
     set(gca, 'XTickLabel', measures);
     set(gca, 'YTickLabel', measures);
+    set(gca,'Ydir','reverse')
     title(subdomain);
     saveas(gcf, filename);
 end
