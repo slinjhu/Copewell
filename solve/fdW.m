@@ -43,7 +43,7 @@ else
     Event_t = Event0 * k * exp(-k * t);
 end
 
-Event_damage_rate =  Event_t * (PM + PVID)/2;
+Event_damage_rate =  Event_t * (2 - PM - PVID)/2;
 
 CF_depletion_rate = CF_depletion_rate_constant * CF * Event_damage_rate;
 
