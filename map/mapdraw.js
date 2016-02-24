@@ -12,7 +12,7 @@ function mapdraw(container, datafile, title, min, max){
         d3.select(container)
         .insert('p', ":first-child")
             .style('text-align', 'center')
-            .style('font-size', '18pt')
+            .attr("class", "map-title") 
         .html(title);
     });
 }
@@ -57,7 +57,7 @@ Choropleth.prototype.addLegend = function(countydata){
     .style('float', 'left')
     .style('border-top-width', '15px')
     .style('border-top-style', 'solid')
-    .style('font-size', '140%')
+    .style('font-size', '150%')
     .style('width', '80px')
     .style('border-top-color', function(d){
         return countydata.valueToColor(d);

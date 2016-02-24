@@ -20,6 +20,9 @@
         float: left;
         zoom: 60%;
     }
+    .map-title{
+        font-size: 32pt;
+    }
 
     </style>
 </head>
@@ -57,10 +60,10 @@
         var filename2 = "../solve/" + folder + '/Resilience (relative).csv';
         var filename3 = "../solve/" + folder + '/Resistance.csv';
         var filename4 = "../solve/" + folder + '/RecoveryRate.csv';
-        var title1 = 'Resilience (absolute) of ' + eventText;
-        var title2 = 'Resilience (relative) of ' + eventText;
-        var title3 = 'Resistance of ' + eventText;
-        var title4 = 'Recovery Rate of ' + eventText;
+        var title1 = 'Resilience (absolute)';
+        var title2 = 'Resilience (relative)';
+        var title3 = 'Resistance';
+        var title4 = 'Recovery Rate';
 
         if($("#minmax").is(':checked')){
             mapdraw("#map1", filename1, title1);
