@@ -6,39 +6,6 @@
 using namespace std;
 using namespace boost::numeric::odeint;
 
-// ================ Class to track time
-typedef chrono::high_resolution_clock HRTime;
-typedef chrono::time_point<HRTime> TimePoint;
-typedef std::chrono::duration<float> fsec;
-class Timer{
-private:
-  TimePoint t0;
-public:
-  Timer(){
-    t0 = HRTime::now();
-    trackMUS("Timer created");
-  }
-  float trackMUS(string message){
-    // Print the elapsed time. 
-    auto t1 = HRTime::now();
-    fsec fs = t1 - t0;
-    float duration = fs.count() * 1000000 ;
-    cout << message << ": " << duration << " micro sec\n";
-    return duration;
-  }
-
-  void track(string message){
-    // Print the elapsed time. 
-    auto t1 = HRTime::now();
-    fsec fs = t1 - t0;
-    cout << message << ": " << fs.count() << " s\n";
-  }
-
-  void reset(){
-    t0 = HRTime::now();
-  }
-};
-
 typedef vector<double> state_type;
 
 const double Event_damage_rate_constant = 4;
@@ -79,24 +46,19 @@ void df(const state_type &x , state_type &dxdt , double t){
   dxdt[6] = 0; // constant Event0
 }
 
-void writef( const state_type &x , const double t ){
+void writef( const state_type &x , const double t){
   cout << t << ":\t" << x[0] << endl;
 }
 
 int main(int argc, char **argv){
-  Timer timer;
-  timer.reset();
-
-  int N = 1;
+  int N = 3500;
   vector<int> result (N, 0);
 #pragma omp parallel for
   for(int i = 0; i < N; i++){
     double CF0 = 1;
     state_type x = {CF0, 0.5, 0.5, 0.5, 0.5, CF0, 0.5};
-    integrate(df, x , 0.0, 12.0 , 0.01, writef);
+    integrate(df, x , 0.0, 12.0 , 0.01);
     //result[i] = i;
   }
 
-  
-  timer.track("Solve");
 }
