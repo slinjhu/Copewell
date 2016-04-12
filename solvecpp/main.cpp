@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
 #include <vector>
 #include <chrono>
-#include <cmath>
 #include <boost/numeric/odeint.hpp>
 using namespace std;
 
@@ -32,9 +34,11 @@ void df (const VD& x , VD& dxdt , double t){
   const double PM = x[2];
   const double PVID = x[3];
   const double SC = x[4];
+  //const double Event0 = x[5];
+  const double Event0 = 1;
   const double ER = 0.5;
-  const double CF0 = x[5];
-  const double Event0 = x[6];
+  const double CF0 = x[6];
+  
   // CF replenishment
   const double CF_drop = max( CF0 - CF, 0.0 );
   const double SC_flow_rate = SC_flow_rate_constant * CF * SC * CF_drop;
@@ -52,8 +56,8 @@ void df (const VD& x , VD& dxdt , double t){
   dxdt[2] = 0; // constant PM
   dxdt[3] = 0; // constant PVID
   dxdt[4] = - SC_flow_rate;
-  dxdt[5] = 0; // constant CF0
-  dxdt[6] = 0; // constant Event0
+  dxdt[5] = 0; // constant Event0
+  dxdt[6] = 0; // constant CF0
 }
 
 double area(const History & hist){
@@ -89,15 +93,55 @@ Result analyze(const History & hist){
   return {resistance, recovery, resilience};
 }
 
+vector<pair<int,VD>> load(string filename){
+  vector<pair<int,VD>> x0s;
+  ifstream fid (filename);
+  if(fid.is_open()){
+    string line;
+    getline(fid, line); // skip the first line
+    while(getline(fid, line)){
+      stringstream ss(line);
+      // Get fips code
+      int fips;
+      ss >> fips;
+      ss.ignore();
+      // Get all values 
+      double num;
+      VD x0;
+      while(ss >> num){
+        x0.push_back(num);
+        if(ss.peek() == ',') ss.ignore();
+      }
+      x0.push_back(x0[0]); // CF0
+      x0s.push_back({fips, x0});
+    }
+  }
+  return x0s;
+}
+
 int main(int argc, char **argv){
+  auto x0s = load("domain.csv");
+  vector<pair<int,Result>> results (x0s.size());
+
   //#pragma omp parallel for
-  double CF0 = 0.5;
-  VD x = {CF0, 0.5, 0.5, 0.5, 0.5, CF0, 0.5};
-  History hist;
-  boost::numeric::odeint::integrate(df, x , 0.0, 12.0 , 0.01, Observer(hist));
-  auto rslt = analyze(hist);
-  cout << "resistance: " << rslt.resistance << endl
-       << "recovery: " << rslt.recovery << endl
-       << "resilience: " << rslt.resilience << endl;
+  for(size_t i = 0; i < x0s.size(); i++){
+    const int fips = x0s[i].first;
+    VD x = x0s[i].second;
+    History hist;
+    boost::numeric::odeint::integrate(df, x , 0.0, 12.0 , 0.01, Observer(hist));
+    results[i] = {fips, analyze(hist)};
+  }
+
+  // Write to file
+  ofstream outfile;
+  outfile.open("out.csv");
+  outfile << "fips,resistance,recovery,resilience\n";
+  for(auto pr : results){
+    Result rslt = pr.second;
+    outfile << pr.first << ","
+            << rslt.resistance << ","
+            << rslt.recovery << ","
+            << rslt.resilience << endl;
+  }
 
 }
