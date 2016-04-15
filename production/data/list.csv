@@ -1,45 +1,45 @@
-ID,description,domain,subdomain,direction
+id,description,domain,subdomain,Direction
 1,% households with Internet service,CF,Communication,+
 3,# banking companies per 10k pop,CF,Economy,+
-4,# jobs per capita,CF,Economy,+
+4,# jobs per capita,CF,Economy,don't use
 5,Median household income,CF,Economy,+
 6,# employers per 10k pop,CF,Economy,+
 7,Pupil/Teacher Ratio (Public School),CF,Education,-
-8,# public schools per 10k pop,CF,Education,+
-9,# public school teachers per 1k pop,CF,Education,+
-10,Average # students per public school,CF,Education,-
+8,# public schools per 10k pop,CF,Education,don't use
+9,# public school teachers per 1k pop,CF,Education,don't use
+10,Average # students per public school,CF,Education,don't use
 11,# grocery stores per 10k pop,CF,Food and Water,+
 12,# grocery stores per 100 square mile,CF,Food and Water,+
 14,% households on public water,CF,Food and Water,+
 68,"% housing units in a county without a car and more than 1 mile from a supermarket, supercenter or large grocery store. ",CF,Food and Water,-
-15,Per capita federal government spending ($1k),CF,Government,+
-16,% incomes in government employment,CF,Government,+
-17,# governments and special districts in county per 1k pop,CF,Government,-
-18,"% in federal, state, and local government employment",CF,Government,+
-19,% vacant houses,CF,Housing,-
-20,# traveler's accommodations per 10k pop,CF,Housing,+
+15,Per capita federal government spending ($1k),PR,Preparedness Response,+
+16,% incomes in government employment,CF,Government,don't use
+17,# governments and special districts in county per 1k pop,CF,Government,don't use
+18,"% in federal, state, and local government employment",PR,Government,don't use
+19,% vacant houses,CF,Housing,don't use
+20,# traveler's accommodations per 10k pop,CF,Housing,don't use
 21,# dwelling units per 10k pop,CF,Housing,+
-22,% vacant rental units,CF,Housing,+
+22,% vacant rental units,CF,Housing,don't use
 23,# physicians per 10k pop,CF,Medicine and Healthcare,+
 24,# hospital beds per 10k pop,CF,Medicine and Healthcare,+
 25a,% women on medicare with mammogram,CF,Medicine and Healthcare,+
 25b,% women on medicare with diabetes,CF,Medicine and Healthcare,+
 26,% uninsured adults,CF,Medicine and Healthcare,-
-30,% children with single parent,CF,Nurturing and Care,-
-31,% households with one person,CF,Nurturing and Care,-
+30,% children with single parent,CF,Nurturing and Care,don't use
+31,% households with one person,CF,Nurturing and Care,don't use
 32,# nursing homes per 10k pop,CF,Nurturing and Care,+
 38,% walk or cycle to work,CF,Transportation,+
 42,All cause mortality per 100k pop,CF,Well being,-
 43,% self-reported excellent or very good health,CF,Well being,+
 44,Well-being of life (Average Life expectency),CF,Well being,+
-45,# bridges per 100 square mile,PM,Engineered Systems,-
+45,# bridges per 100 square mile,PM,Engineered Systems,don't use
 48,Average age of housing stock,PM,Engineered Systems,-
 49,% housing units that are not mobile homes,PM,Engineered Systems,+
-50a,Median residential download speed (mbps),PM,Engineered Systems,+
-50b,Median mobile download speed (mbps),PM,Engineered Systems,+
+50a,Median residential download speed (mbps),PM,Engineered Systems,don't use
+50b,Median mobile download speed (mbps),PM,Engineered Systems,don't use
 51,% bridges with structural deficiencies,PM,Engineered Systems,-
-52,% bridges that are obsolete,PM,Engineered Systems,-
-54,% pop affected by water violation of those served by public water system,PM,Engineered Systems,-
+52,% bridges that are obsolete,PM,Engineered Systems,don't use
+54,% pop affected by water violation of those served by public water system,CF,Food and Water,-
 55,% children in pop (<18 years old),PVID,Vulnerability,-
 56,% elderlies in pop (>85 years old),PVID,Vulnerability,-
 57,% pop in institutions,PVID,Vulnerability,-
@@ -53,6 +53,6 @@ ID,description,domain,subdomain,direction
 73,% pop who use carpool to work,SC,Social Cohesion,+
 74,% pop affiliated with religious group,SC,Social Cohesion,+
 75,# religious buildings per 100 square mile,SC,Social Cohesion,+
-77,# net International migration,SC,Social Cohesion,-
+77,# net International migration,SC,Social Cohesion,don't use
 78,# social advocacy organizations per 10k pop,SC,Social Cohesion,+
 902,Earthquake; Spectral Acceleration (%g),Event,Event,+
