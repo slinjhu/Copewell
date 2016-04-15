@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import argparse
+
+arg_parser = argparse.ArgumentParser(description='Join csv tables using the first column as key')
+arg_parser.add_argument('infiles', type=str, help='path of input files')
+arg_parser.add_argument('outfiles', type=str, help='path of the output file')
+
+args = arg_parser.parse_args()
+

@@ -1,0 +1,34 @@
+#!/usr/bin/python
+
+import argparse
+import glob
+import os
+import pandas
+
+
+arg_parser = argparse.ArgumentParser(description='Join csv tables using the first column as key')
+arg_parser.add_argument('infiles', type=str, help='path of input files')
+arg_parser.add_argument('outfiles', type=str, help='path of the output file')
+
+args = arg_parser.parse_args()
+
+
+df_all = pandas.DataFrame(data={'fips':[]})
+df_all.set_index('fips')
+
+df = pandas.DataFrame.from_csv('../data/3.csv')
+df.columns = ['3']
+print df
+print pandas.merge(df_all, df, how='outer')
+
+"""
+for filepath in glob.glob(args.infiles):
+    key = os.path.basename(filepath).split('.')[0]
+    df = pandas.DataFrame.from_csv(filepath)
+    df_all.join(df)
+"""
+
+
+
+
+
