@@ -1,10 +1,78 @@
 #!/usr/bin/python
 
+import os
+import pandas
+from scipy import stats
+import sqlite3
+import copy
 import argparse
+import warnings
 
-arg_parser = argparse.ArgumentParser(description='Join csv tables using the first column as key')
-arg_parser.add_argument('infiles', type=str, help='path of input files')
-arg_parser.add_argument('outfiles', type=str, help='path of the output file')
 
+def scale(x, direction, subdomain):
+    # Box Cox transformation
+    if subdomain == 'Event':
+        x[x <= 0] = 0
+    else:
+        x[x > 0], _ = stats.boxcox(x[x > 0])
+        x[x <= 0] = min(x[x > 0])
+    # Truncation
+    right_target = x.mean() + 3.5 * x.std()
+    left_target = x.mean() - 3.5 * x.std()
+    x[x > right_target] = right_target
+    x[x < left_target] = left_target;
+    # Change direction
+    if direction == '-':
+        x *= -1
+    x = (x - x.min()) / (x.max() - x.min())
+    return x
+
+arg_parser = argparse.ArgumentParser(description='Aggeragate individual csv data files to db tables')
+arg_parser.add_argument('index_file', type=str, help='path of the index file')
+arg_parser.add_argument('domain_output', type=str, help='output file for domain data')
+arg_parser.add_argument('all_db_output', type=str, help='output db file for all data')
 args = arg_parser.parse_args()
 
+conn = sqlite3.connect(args.all_db_output)
+
+""" Join raw and scaled measures """
+Tmeasures = pandas.DataFrame.from_csv('data/county_48ALHI.csv')
+Tindex = pandas.DataFrame.from_csv(args.index_file)
+for id in Tindex.index:
+    if Tindex.Direction[id] in set(['+', '-']):
+        filepath = 'data/measures/%s.csv' % id
+        if os.path.exists(filepath):
+            df = pandas.DataFrame.from_csv(filepath)
+            value2 = copy.deepcopy(df['value'])
+            value2 = scale(value2, Tindex.Direction[id], Tindex.subdomain[id])
+            df.columns = ['raw' + id]
+            df['scaled' + id] = value2
+            Tmeasures = Tmeasures.join(df, how='left')
+    else:
+        # print 'Skiped:', 'id=', id, 'direction=', index['Direction'][id]
+        pass
+
+Tsubdomains = pandas.DataFrame()
+""" Aggeragate """
+for subdomain in Tindex.subdomain.unique():
+    condition = (Tindex.subdomain == subdomain) & ((Tindex.Direction == '+') | (Tindex.Direction == '-'))
+    idx = map(lambda x: 'scaled'+x, Tindex[condition].index)
+    Tsubdomains[subdomain] = Tmeasures[idx].mean(axis=1)
+Tdomains = pandas.DataFrame()
+for domain in Tindex.domain.unique():
+    condition = (Tindex.domain == domain)
+    idx = Tindex[condition].subdomain.unique()
+    Tdomains[domain] = Tsubdomains[idx].mean(axis=1)
+
+""" Fill missing values in domain """
+for domain in Tdomains.keys():
+    condition = pandas.isnull(Tdomains[domain])
+    Tdomains[domain][condition] = Tdomains[domain].mean()
+
+""" Save to database file """
+warnings.simplefilter('ignore')
+Tindex.to_sql('Tindex', conn, if_exists='replace')
+Tmeasures.to_sql('measures', conn, if_exists='replace')
+Tsubdomains.to_sql('subdomains', conn, if_exists='replace')
+Tdomains.to_sql('domains', conn, if_exists='replace')
+Tdomains.to_csv(args.domain_output)
