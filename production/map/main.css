@@ -1,0 +1,33 @@
+h1{
+    text-align: center;
+}
+h1 a{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+h3{
+    margin-left: 20px;
+}
+p{
+    margin-left: 35px;
+}
+a{
+    text-decoration: none;
+    color: #2980b9;
+}
+body{
+    counter-reset: chapter 0;
+    padding: 15px;
+    font-family: 'Lato', sans-serif;
+}
+h2{
+    counter-reset: sub-chapter 0;
+}
+h2:before{
+    counter-increment: chapter;
+    content: counter(chapter) ". ";
+}
+h3:before{
+    counter-increment: sub-chapter;
+    content: counter(chapter) "." counter(sub-chapter) ": ";
+}

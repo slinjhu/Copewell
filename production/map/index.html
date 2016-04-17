@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Map</title>
+        <meta charset="utf-8">
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://d3js.org/topojson.v1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+        <script src="mapdraw.js"></script>
+        <style type="text/css">
+         .map{
+             border: 1px solid green;
+             max-width: 1000px;
+             min-width: 1000px;
+             margin: 0px;
+             padding: 10px;
+         }
+        </style>
+    </head>
+    <body></body>
+    <script type="text/javascript">
+     var filename = '../dataout/results.csv';
+     d3.csv(filename, function(data) {
+         var cols = Object.keys(data[0]);
+         for(var i = 1; i < cols.length; i++){
+             $('body').append($('<div id="map' + i + '" class="map"></div>'));
+             mapdraw('#map' + i, filename, cols[i]);
+         }
+     });
+    </script>
+</html>
+

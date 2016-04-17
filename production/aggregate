@@ -29,11 +29,10 @@ def scale(x, direction, subdomain):
 
 arg_parser = argparse.ArgumentParser(description='Aggeragate individual csv data files to db tables')
 arg_parser.add_argument('index_file', type=str, help='path of the index file')
-arg_parser.add_argument('domain_output', type=str, help='output file for domain data')
-arg_parser.add_argument('all_db_output', type=str, help='output db file for all data')
+arg_parser.add_argument('out_folder', type=str, help='output folder')
 args = arg_parser.parse_args()
 
-conn = sqlite3.connect(args.all_db_output)
+conn = sqlite3.connect(args.out_folder + '/all.db')
 
 """ Join raw and scaled measures """
 Tmeasures = pandas.DataFrame.from_csv('data/county_48ALHI.csv')
@@ -73,6 +72,8 @@ for domain in Tdomains.keys():
 warnings.simplefilter('ignore')
 Tindex.to_sql('Tindex', conn, if_exists='replace')
 Tmeasures.to_sql('measures', conn, if_exists='replace')
+Tmeasures.to_csv(args.out_folder + '/measures.csv')
 Tsubdomains.to_sql('subdomains', conn, if_exists='replace')
+Tsubdomains.to_csv(args.out_folder + '/subdomains.csv')
 Tdomains.to_sql('domains', conn, if_exists='replace')
-Tdomains.to_csv(args.domain_output)
+Tdomains.to_csv(args.out_folder + '/domains.csv')
