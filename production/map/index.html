@@ -20,16 +20,38 @@
          }
         </style>
     </head>
-    <body></body>
-    <script type="text/javascript">
-     var filename = '../dataout/results.csv';
-     d3.csv(filename, function(data) {
-         var cols = Object.keys(data[0]);
-         for(var i = 1; i < cols.length; i++){
-             $('body').append($('<div id="map' + i + '" class="map"></div>'));
-             mapdraw('#map' + i, filename, cols[i]);
-         }
-     });
+    <body>
+    <p>
+        <b>To plot:</b>
+        <select id="filename" onchange="update();">
+            <option value="results.csv">Results</option>
+            <option value="domains.csv">Domains</option>
+            <option value="subdomains.csv">Subdomains</option>
+        </select>
+    </p>
+    <p>
+        <input type="checkbox" id="minmax" checked onchange="update();">
+        Range from min to max
+    </p>
+    <div id="maps"></div>
+    </body>
+        <script type="text/javascript">
+            update();
+            function update(){
+                var filename = '../dataout/' + $("#filename option:selected").val();
+                d3.csv(filename, function(data) {
+                 var cols = Object.keys(data[0]);
+                    $('#maps').empty();
+                 for(var i = 1; i < cols.length; i++){
+                     $('#maps').append($('<div id="map' + i + '" class="map"></div>'));
+                     if($("#minmax").is(':checked')){
+                         mapdraw('#map' + i, filename, cols[i]);
+                     }else{
+                         mapdraw('#map' + i, filename, cols[i], 0, 1);
+                     }
+                 }
+             });
+            }
     </script>
 </html>
 
