@@ -10,11 +10,11 @@ using namespace std;
 typedef vector<double> VD;
 struct HistoryEntry{double t, CF;};
 typedef vector<HistoryEntry> History;
-struct Result{double resistance, recovery, resilience;};
+struct ResilienceResult{double resistance, recovery, resilience;};
 
-struct Observer{
+struct ODEObserver{
   History& log;
-  Observer(History& vlog):log(vlog){}
+  ODEObserver(History& vlog):log(vlog){}
   void operator()(const VD &x, double t){log.push_back({t, x[0]});}
 };
 
@@ -22,11 +22,11 @@ const map<string,int> csvHeader = {{"CF", 0}, {"PR", 1}, {"PM", 2}, {"PVID", 3},
 
 void df (const VD& x , VD& dxdt , double t);
 double area(const History & hist);
-Result analyze(const History & hist);
+ResilienceResult calculate_resilience(const History & hist);
 void load_data(string filename, map<int,VD>& x0s);
 double get_data(const VD & x0, string domain);
 void set_data(VD & x0, string domain, double value);
-void write_result(string filename, const map<int,Result> & results);
+void write_result(string filename, const map<int,ResilienceResult> & results);
 
 int main(int argc, char **argv){
   if(argc != 3){
@@ -41,13 +41,13 @@ int main(int argc, char **argv){
     load_data(domainDataFile, x0s);
 
     // Solve ODE
-    map<int,Result> results; // fips -> results
+    map<int,ResilienceResult> results; // fips -> results
     for(auto it : x0s){
       const int fips = it.first;
       VD x = it.second;
       History hist;
-      boost::numeric::odeint::integrate(df, x , 0.0, 12.0 , 0.01, Observer(hist));
-      results[fips] = analyze(hist);
+      boost::numeric::odeint::integrate(df, x , 0.0, 12.0 , 0.01, ODEObserver(hist));
+      results[fips] = calculate_resilience(hist);
     }
     write_result(resultDataFile, results);
   }
@@ -103,7 +103,7 @@ double area(const History & hist){
   return area;
 }
 
-Result analyze(const History & hist){
+ResilienceResult calculate_resilience(const History & hist){
   const double CF0 = hist[0].CF;
   // Find nadir and half recovery
   auto nadir = &hist[0];
@@ -171,12 +171,12 @@ void set_data(VD & x0, string domain, double value){
   }
 }
 
-void write_result(string filename, const map<int,Result> & results){
+void write_result(string filename, const map<int,ResilienceResult> & results){
   ofstream outfile;
   outfile.open(filename);
   outfile << "fips,resistance,recovery,resilience\n";
   for(auto pr : results){
-    Result rslt = pr.second;
+    ResilienceResult rslt = pr.second;
     outfile << pr.first << ","
             << rslt.resistance << ","
             << rslt.recovery << ","
