@@ -12,7 +12,7 @@ id,description,domain,subdomain,Direction
 12,# grocery stores per 100 square mile,CF,Food and Water,+
 14,% households on public water,CF,Food and Water,+
 68,"% housing units in a county without a car and more than 1 mile from a supermarket, supercenter or large grocery store. ",CF,Food and Water,-
-15,Per capita federal government spending ($1k),PR,Preparedness Response,+
+15,Per capita federal government spending ($1k),PR,Preparedness,+
 16,% incomes in government employment,CF,Government,don't use
 17,# governments and special districts in county per 1k pop,CF,Government,don't use
 18,"% in federal, state, and local government employment",PR,Government,don't use
@@ -32,6 +32,7 @@ id,description,domain,subdomain,Direction
 42,All cause mortality per 100k pop,CF,Well being,-
 43,% self-reported excellent or very good health,CF,Well being,+
 44,Well-being of life (Average Life expectency),CF,Well being,+
+101,Distance to the nearest coast (1000 miles),PM,Natural Systems,+
 45,# bridges per 100 square mile,PM,Engineered Systems,don't use
 48,Average age of housing stock,PM,Engineered Systems,-
 49,% housing units that are not mobile homes,PM,Engineered Systems,+
@@ -56,3 +57,4 @@ id,description,domain,subdomain,Direction
 77,# net International migration,SC,Social Cohesion,don't use
 78,# social advocacy organizations per 10k pop,SC,Social Cohesion,+
 902,Earthquake; Spectral Acceleration (%g),Event,Event,+
+102,% pop covered by a recent hazard mitigation plan (FEMA),PR,Preparedness,waiting for data
