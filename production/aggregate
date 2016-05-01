@@ -14,8 +14,9 @@ def scale(x, direction, subdomain):
     if subdomain == 'Event':
         x[x <= 0] = 0
     else:
-        x[x > 0], _ = stats.boxcox(x[x > 0])
-        x[x <= 0] = min(x[x > 0])
+        x0 = copy.deepcopy(x)
+        x[x0 > 0], _ = stats.boxcox(x[x0 > 0])
+        x[x0 <= 0] = min(x[x0 > 0])
     # Truncation
     right_target = x.mean() + 3.5 * x.std()
     left_target = x.mean() - 3.5 * x.std()
