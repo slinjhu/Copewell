@@ -35,3 +35,7 @@ h3:before{
 .map-title{
     font-size: 40px;
 }
+
+.map{
+    float: left;
+}
