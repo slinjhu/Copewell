@@ -5,5 +5,9 @@ clean:
 	(rm -rf a.out solver dataout/*.csv)
 
 run:
+	make clean
+	make
 	./aggregate data/list.csv dataout
 	./solver dataout/domains.csv dataout/results.csv
+	python extract.py
+	open map/index.html
