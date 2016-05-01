@@ -31,3 +31,7 @@ h3:before{
     counter-increment: sub-chapter;
     content: counter(chapter) "." counter(sub-chapter) ": ";
 }
+
+.map-title{
+    font-size: 40px;
+}
