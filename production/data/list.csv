@@ -61,3 +61,6 @@ id,description,domain,subdomain,Direction
 103, % Adults with frequent mental distress (BRFSS 2014) ,CF,Population Well being,-
 104,% adults who are current smokers (BRFSS 2014),CF,Healthcare Delivery and Public Health Services,-
 105,% adults physical inactivity (BRFSS 2012),CF,Healthcare Delivery and Public Health Services,-
+106,"% Households with at least one of no kitchen, no plumbing, high cost, or over-crowding (severe housing problems)",CF,Housing,-
+107,% Ninth graders who graduate in four years (high school graduation rate),CF,Education,+
+108,Ratio of population to mental health care providers,CF,Healthcare Delivery and Public Health Services,-
