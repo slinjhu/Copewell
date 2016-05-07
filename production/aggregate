@@ -9,7 +9,7 @@ import argparse
 import warnings
 
 
-def scale(x0, direction, subdomain):
+def scale(x0, direction='+', subdomain='nothing'):
     x = copy.deepcopy(x0)
     # Box Cox transformation
     if subdomain == 'Event':
@@ -69,6 +69,7 @@ for domain in Tindex.domain.unique():
 for domain in Tdomains.keys():
     condition = pandas.isnull(Tdomains[domain])
     Tdomains[domain][condition] = Tdomains[domain].mean()
+    
 
 """ Save to database file """
 warnings.simplefilter('ignore')
